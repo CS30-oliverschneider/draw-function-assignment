@@ -8,7 +8,7 @@ pygame.init()
 displaySize = (800, 800)
 surface = pygame.display.set_mode(displaySize)
 mousedown = "up"
-flowerNum = 50
+flowerNum = 200
 
 def draw_flower(center_coords, radius, petal_num, center_color, petal_color):
     for n in range(petal_num):
@@ -29,7 +29,7 @@ def draw_angled_ellipse(pivot, size, color, angle, offset):
     surface.blit(rotated_ellipse, rotated_ellipse.get_rect(center = pivot + rotated_offset))
 
 def draw_random_flowers():
-    draw_background()
+    pygame.draw.rect(surface, (255, 255, 255), (0, 0, *displaySize))
 
     for _ in range(flowerNum):
         random_center_coords = (random.randrange(displaySize[0]), random.randrange(displaySize[1]))
@@ -41,11 +41,7 @@ def draw_random_flowers():
         draw_flower(random_center_coords, random_center_radius, random_petalNum, random_center_color, random_petal_color)
         pygame.display.flip()
 
-def draw_background():
-    pygame.draw.rect(surface, (255, 255, 255), (0, 0, *displaySize))
-    pygame.display.flip()
-
-draw_background()
+draw_random_flowers()
 running = True
 
 while running:
