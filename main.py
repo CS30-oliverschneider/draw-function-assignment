@@ -27,13 +27,18 @@ def draw_flower(center_coords, center_radius, petal_num, center_color, petal_col
     pygame.draw.circle(surface, center_color, center_coords, center_radius)
 
 def draw_angled_ellipse(pivot, size, angle, color):
-    ellipse_surface = pygame.Surface(size, pygame.SRCALPHA)
-    pygame.draw.ellipse(ellipse_surface, color, (0, 0, *size))
+    # Create offset vector
     offset_vector = pygame.math.Vector2(size[0] / 2, 0)
 
+    # Draw an ellipse on a new surface
+    ellipse_surface = pygame.Surface(size, pygame.SRCALPHA)
+    pygame.draw.ellipse(ellipse_surface, color, (0, 0, *size))
+
+    # Rotate the ellipse surface and the offset vector
     rotated_offset = offset_vector.rotate(-angle)
     rotated_ellipse = pygame.transform.rotate(ellipse_surface, angle)
     
+    # Blit the ellipse surface onto the main surface
     surface.blit(rotated_ellipse, rotated_ellipse.get_rect(center = pivot + rotated_offset))
 
 def draw_random_flowers():
